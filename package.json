@@ -33,6 +33,7 @@
     "migrate": "knex migrate:latest",
     "rollback": "knex migrate:rollback"
   },
+  "proxy": "http://localhost:5000",
   "eslintConfig": {
     "extends": [
       "react-app",
