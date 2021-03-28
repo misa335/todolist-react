@@ -37,7 +37,7 @@ const InputTodo = () => {
     // }
 
     return <Fragment>
-        <h1 className="text-center mt-5">Misa's TODO List</h1>
+        <h1 className="text-center mt-5">Misa's To Do List</h1>
         <form className="d-flex mt-5" onSubmit={onSubmitForm}>
             <input type="text" className="form-control" value={todo} onChange={e => setTodo(e.target.value)} />
             <input type="text" className="form-control" value={dueDay} onChange={e => setDueDay(e.target.value)} />
