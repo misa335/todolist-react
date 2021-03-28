@@ -9,7 +9,10 @@ const InputTodo = () => {
     //create a todo
     const onSubmitForm = async (e) => {
         e.preventDefault();
-        const body = { todo, dueDay };
+        const body = {
+            todo: todo,
+            dueDay: dueDay
+        };
         await axios.post("/todos", body)
         .then(res => {
             window.location="/";

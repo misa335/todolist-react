@@ -1,34 +1,37 @@
 import React, { Fragment, useEffect, useState } from "react";
 import axios from "axios";
 
+import EditTodo from "./EditTodo";
+
 const ListTodos = () => {
 
-    const [todos, setTodos] = useState([]);
+    const [lists, setLists] = useState([]);
 
     //delete
-    const deleteTodo = async (id) => {
+    const deleteList = async (id) => {
         await axios.delete(`/todos/${id}`)
-        .then(res => {
-            setTodos(todos.filter(todo => todo.id !== id));
+        .then(() => {
+            setLists(lists.filter(list => list.id !== id));
+            window.location="/";
         }).catch (err => {
                  console.error(err.message);
         });
     };
 
     //getAlltodos
-    const getTodos = async () => {
+    const getLists = async () => {
         await axios.get('/todos')
         .then(res => {
             console.log("res:", res);
             console.log("data:", res.data);
-            setTodos(res.data);
+            setLists(res.data);
         }).catch (err => {
             console.error(err.message);
         });
     };
 
     useEffect(() => {
-        getTodos();
+        getLists();
     }, []);
 
     // console.log(todos);
@@ -43,13 +46,15 @@ const ListTodos = () => {
                 </tr>
             </thead>
             <tbody>
-                {todos.map(todo => (
-                    <tr key={todo.id}>
-                        <td>{todo.todo}</td>
-                        <td>{todo.due_day}</td>
-                        <td>Edit</td>
+                {lists.map(list => (
+                    <tr key={list.id}>
+                        <td>{list.todo}</td>
+                        <td>{list.due_day}</td>
                         <td>
-                            <button className="btn btn-danger" onClick={() => deleteTodo(todo.id)}>Delete</button>
+                            <EditTodo list={list} setLists={setLists}/>
+                        </td>
+                        <td>
+                            <button className="btn btn-danger" onClick={() => deleteList(list.id)}>Delete</button>
                         </td>
                     </tr>
                 ))}
